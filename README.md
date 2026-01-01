@@ -1,18 +1,22 @@
 <img src="./Café com dados & Códigos-crop.png" alt="Capa do canal Café com Dados & Códigos" width="100%"/>
 
-# 📊 Café com Dados & Códigos
+<img src="./Café com dados & Gatos-crop.png" alt="Capa do canal Café com Dados & Gatos" width="100%"/>
 
-Bem-vindo(a) ao repositório oficial do projeto **Café com Dados & Códigos**!
+# 📊 Café com Dados & Gatos
 
-Este espaço reúne todos os códigos, visualizações, roteiros e materiais de apoio utilizados na produção dos vídeos técnicos e educativos sobre Ciência de Dados, Machine Learning, Estatística e Inteligência Artificial.
+Bem-vindo(a) ao repositório oficial do **Café com Dados & Gatos**! ☕🐾
+
+Este espaço reúne **códigos, notebooks, visualizações, roteiros e materiais de apoio** usados na produção dos conteúdos sobre **Ciência de Dados**, com leveza, clareza e aplicação prática — com a companhia oficial dos gatos. 😸
 
 ## 🎥 Conteúdo
 
-Este repositório em pastas para facilitar o acesso aos códigos:
+Este repositório está organizado em pastas para facilitar o acesso aos materiais.
 
-### 📺 Os códigos são referentes aos vídeos, não há códigos de shorts disponíveis no momento.
+### 📺 Observação
+Os códigos são referentes aos **vídeos do canal**.  
 
 ## 🧠 Temas abordados
+- **SQL e Banco de Dados** (consultas, joins e lógica)
 - Aprendizado Supervisionado e Não Supervisionado
 - Regressão Linear e Múltipla
 - Naive Bayes
@@ -23,10 +27,9 @@ Este repositório em pastas para facilitar o acesso aos códigos:
 - Entre outros
 
 ## 🛠 Tecnologias utilizadas
-- Python (Scikit-learn, Pandas, Matplotlib, Seaborn, etc.)
-- R (para análises estatísticas)
+- **Python** (Scikit-learn, Pandas, Matplotlib, Seaborn, etc.)
+- **SQL**
 - Google Colab
-
 
 ## ✨ Contribuições
 Este projeto está em desenvolvimento contínuo. Sugestões e feedbacks são sempre bem-vindos!
@@ -34,4 +37,4 @@ Este projeto está em desenvolvimento contínuo. Sugestões e feedbacks são sem
 ---
 
 📌 **Criado e mantido por [Denise Marti](https://github.com/djeannie29)**  
-🎬 Canal: *Café com Dados & Códigos*
+🎬 Canal: *Café com Dados & Gatos* ☕🐱
