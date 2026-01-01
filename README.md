@@ -1,6 +1,4 @@
-<img src="./Café com dados & Códigos-crop.png" alt="Capa do canal Café com Dados & Códigos" width="100%"/>
 
-<img src="./Café com dados & Gatos-crop.png" alt="Capa do canal Café com Dados & Gatos" width="100%"/>
 
 # 📊 Café com Dados & Gatos
 
