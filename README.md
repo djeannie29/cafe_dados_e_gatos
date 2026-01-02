@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="caminho/para/banner_github.png" width="1000" alt="Capa do Projeto"/>
+</p>
 
 
 # 📊 Café com Dados & Gatos
