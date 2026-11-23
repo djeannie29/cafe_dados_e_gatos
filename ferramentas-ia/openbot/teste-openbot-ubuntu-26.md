@@ -13,74 +13,74 @@
 
 No **terminal do Ubuntu**, não no PowerShell:
 
-\`\`\`bash
+```bash
 cat /etc/os-release | grep PRETTY_NAME
 uname -m
 echo "$XDG_SESSION_TYPE"
-\`\`\`
+```
 
-Esperado: Ubuntu 26.04; arquitetura \`x86_64\` para o arquivo usado neste guia. A sessão pode ser \`x11\` ou \`wayland\`; algumas funções de desktop remoto exigem X11.
+Esperado: Ubuntu 26.04; arquitetura `x86_64` para o arquivo usado neste guia. A sessão pode ser `x11` ou `wayland`; algumas funções de desktop remoto exigem X11.
 
 ## Preparar dependências
 
-\`\`\`bash
+```bash
 sudo apt update
 sudo apt install -y curl fuse3
-\`\`\`
+```
 
-O AppImage do OpenBot usa \`fusermount3\` (pacote \`fuse3\`). **Não precisa de \`libfuse2\`**, segundo o README oficial. Versão pré-compilada não requer instalar Bun, Node.js, npm ou Docker.
+O AppImage do OpenBot usa `fusermount3` (pacote `fuse3`). **Não precisa de `libfuse2`**, segundo o README oficial. Versão pré-compilada não requer instalar Bun, Node.js, npm ou Docker.
 
 ## Baixar a versão de teste
 
-\`\`\`bash
+```bash
 mkdir -p "$HOME/Applications"
 cd "$HOME/Applications"
 curl -fL --retry 3 \
   -o OpenBot-0.76.1-x86_64.AppImage \
   https://github.com/nightly-labs/openbot/releases/download/v0.76.1/OpenBot-0.76.1-x86_64.AppImage
-\`\`\`
+```
 
 **Verificação de integridade do download** (antes de executar):
 
-\`\`\`bash
+```bash
 curl -fL --retry 3 \
   -o SHA256SUMS-linux.txt \
   https://github.com/nightly-labs/openbot/releases/download/v0.76.1/SHA256SUMS-linux.txt
 grep 'OpenBot-0.76.1-x86_64.AppImage' SHA256SUMS-linux.txt | sha256sum -c -
-\`\`\`
+```
 
-Esperado: \`OpenBot-0.76.1-x86_64.AppImage: OK\`. Se \`grep\` não encontrar o nome ou a verificação falhar, **pare** e confira a release: não execute arquivo sem integridade confirmada. O \`sha256sum\` confirma correspondência com o arquivo de checksums daquela release; não substitui uma política de verificação de procedência.
+Esperado: `OpenBot-0.76.1-x86_64.AppImage: OK`. Se `grep` não encontrar o nome ou a verificação falhar, **pare** e confira a release: não execute arquivo sem integridade confirmada. O `sha256sum` confirma correspondência com o arquivo de checksums daquela release; não substitui uma política de verificação de procedência.
 
-\`\`\`bash
+```bash
 chmod +x OpenBot-0.76.1-x86_64.AppImage
-\`\`\`
+```
 
 ## Configurar o AppArmor (Ubuntu 26.04)
 
 O projeto informa que Ubuntu 23.10+ pode restringir os *user namespaces* de que o sandbox do Electron necessita. O perfil a seguir é fornecido **pelo próprio OpenBot**, fixado na versão testada.
 
-\`\`\`bash
+```bash
 curl -fL --retry 3 \
   -o /tmp/openbot.apparmor \
   https://raw.githubusercontent.com/nightly-labs/openbot/v0.76.1/build/linux/openbot.apparmor
 cat /tmp/openbot.apparmor
-\`\`\`
+```
 
-O perfil oficial contém um caminho de anexação que abrange \`~/Applications/OpenBot*.AppImage\`; por isso mantemos o arquivo nessa pasta.
+O perfil oficial contém um caminho de anexação que abrange `~/Applications/OpenBot*.AppImage`; por isso mantemos o arquivo nessa pasta.
 
-\`\`\`bash
+```bash
 sudo install -m 0644 /tmp/openbot.apparmor /etc/apparmor.d/openbot
 sudo systemctl reload apparmor
-\`\`\`
+```
 
-**Não usar \`--no-sandbox\`** como correção de erro. A própria documentação desencoraja desativar essa proteção.
+**Não usar `--no-sandbox`** como correção de erro. A própria documentação desencoraja desativar essa proteção.
 
 ## Abrir o aplicativo
 
-\`\`\`bash
+```bash
 cd "$HOME/Applications"
 ./OpenBot-0.76.1-x86_64.AppImage
-\`\`\`
+```
 
 ### Checagens na tela (registrar, não presumir sucesso)
 
@@ -97,12 +97,12 @@ cd "$HOME/Applications"
 
 Esta etapa não foi validada ainda e depende de um agente/provedor autenticado.
 
-\`\`\`bash
+```bash
 mkdir -p "$HOME/Documentos/lab-openbot"
 printf 'Laboratorio OpenBot - nao modificar outros diretorios.\n' > "$HOME/Documentos/lab-openbot/LEIA-ME.txt"
-\`\`\`
+```
 
-No OpenBot, **se for possível delimitar a pasta de trabalho**, escolher \`~/Documentos/lab-openbot\`. Não presumir que a escolha da pasta seja uma barreira de segurança; permissões do agente e da ferramenta precisam ser verificadas.
+No OpenBot, **se for possível delimitar a pasta de trabalho**, escolher `~/Documentos/lab-openbot`. Não presumir que a escolha da pasta seja uma barreira de segurança; permissões do agente e da ferramenta precisam ser verificadas.
 
 Prompt inicial (apenas leitura):
 
@@ -114,30 +114,30 @@ Quando a leitura funcionar e **somente se as permissões forem compreendidas**, 
 
 Conferir no terminal:
 
-\`\`\`bash
+```bash
 ls -la "$HOME/Documentos/lab-openbot"
 cat "$HOME/Documentos/lab-openbot/resultado-openbot.txt"
-\`\`\`
+```
 
-Se \`~/Documentos\` não existir, usar uma pasta de laboratório escolhida manualmente; registrar o caminho efetivamente utilizado.
+Se `~/Documentos` não existir, usar uma pasta de laboratório escolhida manualmente; registrar o caminho efetivamente utilizado.
 
 ## Problemas conhecidos / diagnóstico
 
-**AppImage reclama de \`fusermount\`:**
+**AppImage reclama de `fusermount`:**
 
-\`\`\`bash
+```bash
 command -v fusermount3
 sudo apt install -y fuse3
-\`\`\`
+```
 
-**Fecha imediatamente com erro de \`user namespaces\` ou \`SUID sandbox\`:** conferir se \`/etc/apparmor.d/openbot\` foi instalado e se o AppImage está no caminho esperado pelo perfil. Não recorrer ao \`--no-sandbox\`.
+**Fecha imediatamente com erro de `user namespaces` ou `SUID sandbox`:** conferir se `/etc/apparmor.d/openbot` foi instalado e se o AppImage está no caminho esperado pelo perfil. Não recorrer ao `--no-sandbox`.
 
 **Falha de GPU na abertura:** o guia oficial descreve o teste de inicialização com renderização por CPU:
 
-\`\`\`bash
+```bash
 cd "$HOME/Applications"
 OPENBOT_DISABLE_GPU=1 ./OpenBot-0.76.1-x86_64.AppImage
-\`\`\`
+```
 
 Esse comando é **alternativo**, apenas se houver falha de GPU; não executar simultaneamente com a instância normal.
 
@@ -145,9 +145,9 @@ Esse comando é **alternativo**, apenas se houver falha de GPU; não executar si
 
 **Agente exige CLI:** testar a instalação e o login da CLI correspondente separadamente. Exemplo para um Codex já instalado:
 
-\`\`\`bash
+```bash
 codex --version
-\`\`\`
+```
 
 Não publicar credenciais; não instalar agentes automaticamente sem necessidade.
 
@@ -155,13 +155,13 @@ Não publicar credenciais; não instalar agentes automaticamente sem necessidade
 
 Fechar o OpenBot pela interface. Se quiser remover somente o arquivo AppImage baixado:
 
-\`\`\`bash
+```bash
 rm -i "$HOME/Applications/OpenBot-0.76.1-x86_64.AppImage"
-\`\`\`
+```
 
-**Atenção:** este comando remove o instalador/app executável e pede confirmação. Não apaga automaticamente as configurações do usuário em \`~/.config/OpenBot\`.
+**Atenção:** este comando remove o instalador/app executável e pede confirmação. Não apaga automaticamente as configurações do usuário em `~/.config/OpenBot`.
 
-O AppImage pode criar atalhos em \`~/.local/share/applications/openbot.desktop\` e \`~/.local/share/icons/openbot.png\`. A remoção de perfis ou configurações deve ser uma decisão separada, depois da avaliação do teste.
+O AppImage pode criar atalhos em `~/.local/share/applications/openbot.desktop` e `~/.local/share/icons/openbot.png`. A remoção de perfis ou configurações deve ser uma decisão separada, depois da avaliação do teste.
 
 ## Fontes primárias consultadas
 
