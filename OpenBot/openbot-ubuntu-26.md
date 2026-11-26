@@ -1,5 +1,7 @@
 # OpenBot — Ubuntu 26.04 (AMD64 / x86_64)
 
+[Português](./openbot-ubuntu-26.md) · [Español](./openbot-ubuntu-26-es.md) · [English](./openbot-ubuntu-26-en.md)
+
 **Site oficial:** https://openbot.run/
 
 ## 1. Preparar o Ubuntu
